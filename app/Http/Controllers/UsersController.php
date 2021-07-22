@@ -25,18 +25,20 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('layout');
+        return view('form');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->only(['name', 'email']));
+        return redirect()->route('users.index');
+        //dd($request->all());
     }
 
     /**
@@ -47,7 +49,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('show');
     }
 
     /**
@@ -58,7 +60,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('form', compact('user'));
     }
 
     /**
@@ -69,8 +71,9 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-    {
-        //
+    {    $user->update($request->only(['name', 'email']));
+        return redirect()->route('users.index');
+        dd($request->all());
     }
 
     /**
