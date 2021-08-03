@@ -41,4 +41,6 @@ action="{{route('users.store')}}">
 </div>
 
 </form>
+
+
 @endsection
