@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,11 +35,11 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         User::create($request->only(['name', 'email']));
         return redirect()->route('users.index');
-        //dd($request->all());
+        dd($request->all());
     }
 
     /**
@@ -70,7 +71,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {    $user->update($request->only(['name', 'email']));
         return redirect()->route('users.index');
         dd($request->all());
